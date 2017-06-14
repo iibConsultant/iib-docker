@@ -5,9 +5,7 @@
 # are made available under the terms of the Eclipse Public License v1.0
 # which accompanies this distribution, and is available at
 # http://www.eclipse.org/legal/epl-v10.html
-echo "----------------------------------"
-echo "Version 20"
-echo "----------------------------------"
+
 set -e
 
 NODE_NAME=${NODENAME-IIBV10NODE}
@@ -22,7 +20,7 @@ stop()
 start()
 {
 	echo "----------------------------------------"
-  /opt/ibm/iib-10.0.0.5/iib version
+  /opt/ibm/iib-10.0.0.8/iib version
 	echo "----------------------------------------"
 
   NODE_EXISTS=`mqsilist | grep $NODE_NAME > /dev/null ; echo $?`
@@ -54,9 +52,7 @@ monitor()
 	done
 }
 
-#sudo /opt/ibm/iib-10.0.0.5/iib make registry global accept license silently
-# iib-license-check.sh
-#. /opt/ibm/iib-10.0.0.5/server/bin/mqsiprofile
-#start
+iib-license-check.sh
+start
 trap stop SIGTERM SIGINT
 monitor
